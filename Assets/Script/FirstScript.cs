@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FirstScript : MonoBehaviour
 {
-    float speed = 0.1f;
+    float speed = 0.01f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +17,7 @@ public class FirstScript : MonoBehaviour
         Vector2 pos = transform.position;
         pos.x += speed;
         Vector2 squareInScreenSpace = Camera.main.WorldToScreenPoint(pos);
-        if (squareInScreenSpace.x < 0 || squareInScreenSpace.x > Screen.width) ;
+        if (squareInScreenSpace.x < 0 || squareInScreenSpace.x > Screen.width) 
         {
             speed = speed * -1;
         }

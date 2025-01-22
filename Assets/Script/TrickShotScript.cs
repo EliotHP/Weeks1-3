@@ -10,8 +10,9 @@ public class TrickShotScript : MonoBehaviour
     public Transform start;
     public Transform end;
     public AnimationCurve curve;
-    float speedX = 0.1f;
+    float speedX = 0.01f;
     float speedY = 0.001f;
+    bool Jump = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,8 @@ public class TrickShotScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        t += Time.deltaTime;
+        transform.position = Vector2.Lerp(start.position, end.position, curve.Evaluate(t));
+        transform.eulerAngles = Vector3.Lerp(start.eulerAngles, end.eulerAngles, curve.Evaluate(t));
         Vector2 pos = transform.position;
         pos.x += speedX;
         pos.y += speedY;
@@ -35,12 +37,19 @@ public class TrickShotScript : MonoBehaviour
 
         if (Input.GetKey("space"))
         {
+            Jump = true;
             speedY = t;
+        }
+        if (Jump == true)
+        {
+            t += Time.deltaTime;
         }
         if (t > 1)
         {
             t = 0;
+            Jump = false;
         }
+
     }
 
 }
