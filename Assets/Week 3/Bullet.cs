@@ -5,10 +5,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 5;
-    bool hasBeenFired = false;
+    public bool hasBeenFired = false;
     void Update()
     {
-        PointAtMouse();
+        if (hasBeenFired)
+        {
+            Movement();
+        }
+        else
+        {
+            PointAtMouse();
+        }
     }
 
     void PointAtMouse()
@@ -22,6 +29,6 @@ public class Bullet : MonoBehaviour
 
     void Movement()
     {
-        
+        transform.position += transform.up * speed * Time.deltaTime;
     }
 }
